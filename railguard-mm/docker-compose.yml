@@ -1,0 +1,84 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:2.29.1-pg16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-railguard}
+      POSTGRES_USER: ${POSTGRES_USER:-railguard}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-railguard_dev}
+    volumes:
+      - timescale-data:/var/lib/postgresql/data
+      - ./cloud/db/init.sql:/docker-entrypoint-initdb.d/001-init.sql:ro
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-railguard}"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  mosquitto:
+    image: eclipse-mosquitto:2.0.22
+    command: ["mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
+    volumes:
+      - ./deploy/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - mosquitto-data:/mosquitto/data
+    ports:
+      - "127.0.0.1:1883:1883"
+
+  minio:
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-railguard}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-railguard_minio_dev}
+    ports:
+      - "127.0.0.1:9000:9000"
+      - "127.0.0.1:9001:9001"
+    volumes:
+      - minio-data:/data
+
+  ingestor:
+    build:
+      context: .
+      dockerfile: cloud/ingestor/Dockerfile
+    env_file: .env
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+      mosquitto:
+        condition: service_started
+
+  ml-worker:
+    build:
+      context: .
+      dockerfile: cloud/ml_worker/Dockerfile
+    env_file: .env
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+
+  api:
+    build: ./cloud/api
+    env_file: .env
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+      minio:
+        condition: service_started
+
+  web:
+    build:
+      context: ./web
+      args:
+        VITE_API_BASE: /api
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+volumes:
+  timescale-data:
+  minio-data:
+  mosquitto-data:

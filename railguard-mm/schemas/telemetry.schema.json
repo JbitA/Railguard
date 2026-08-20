@@ -1,0 +1,389 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RailGuard telemetry",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "device_id",
+    "ts",
+    "seq",
+    "sample_period_ms",
+    "gps",
+    "environment",
+    "vibration",
+    "vision",
+    "health"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "device_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "ts": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,9})?Z$"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "gps": {
+      "type": "object",
+      "required": [
+        "lat",
+        "lon",
+        "speed_mps"
+      ],
+      "properties": {
+        "lat": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": -180,
+          "maximum": 180
+        },
+        "speed_mps": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 200
+        }
+      },
+      "additionalProperties": false
+    },
+    "environment": {
+      "type": "object",
+      "required": [
+        "temperature_c",
+        "humidity"
+      ],
+      "properties": {
+        "temperature_c": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": -80,
+          "maximum": 125
+        },
+        "humidity": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "vibration": {
+      "type": "object",
+      "required": [
+        "rms_ms2",
+        "peak_ms2",
+        "kurtosis",
+        "crest_factor",
+        "band_energy"
+      ],
+      "properties": {
+        "rms_ms2": {
+          "type": "number",
+          "minimum": 0
+        },
+        "peak_ms2": {
+          "type": "number",
+          "minimum": 0
+        },
+        "kurtosis": {
+          "type": "number",
+          "minimum": 0
+        },
+        "crest_factor": {
+          "type": "number",
+          "minimum": 0
+        },
+        "band_energy": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          },
+          "minItems": 4,
+          "maxItems": 4
+        },
+        "sensors": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "sensor_id",
+              "rms_ms2",
+              "peak_ms2",
+              "kurtosis",
+              "crest_factor",
+              "band_energy"
+            ],
+            "properties": {
+              "sensor_id": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2
+              },
+              "rms_ms2": {
+                "type": "number",
+                "minimum": 0
+              },
+              "peak_ms2": {
+                "type": "number",
+                "minimum": 0
+              },
+              "kurtosis": {
+                "type": "number",
+                "minimum": 0
+              },
+              "crest_factor": {
+                "type": "number",
+                "minimum": 0
+              },
+              "band_energy": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "minItems": 4,
+                "maxItems": 4
+              }
+            },
+            "additionalProperties": false
+          },
+          "allOf": [
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "sensor_id": {
+                    "const": 0
+                  }
+                },
+                "required": [
+                  "sensor_id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "sensor_id": {
+                    "const": 1
+                  }
+                },
+                "required": [
+                  "sensor_id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "sensor_id": {
+                    "const": 2
+                  }
+                },
+                "required": [
+                  "sensor_id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "vision": {
+      "type": "object",
+      "required": [
+        "motion_score",
+        "contrast",
+        "sharpness"
+      ],
+      "properties": {
+        "motion_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "contrast": {
+          "type": "number",
+          "minimum": 0
+        },
+        "frame_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sharpness": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "health": {
+      "type": "object",
+      "required": [
+        "packet_loss",
+        "spool_depth"
+      ],
+      "properties": {
+        "packet_loss": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "spool_depth": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "camera_matched": {
+          "type": "boolean"
+        },
+        "sync_error_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "sensor_skew_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "context_flags": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "clock_alignment_locked": {
+          "type": "boolean"
+        },
+        "clock_jitter_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "clock_samples": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "spool_dropped": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "prediction": {
+      "type": "object",
+      "required": [
+        "model_version",
+        "horizons",
+        "step_ms",
+        "vibration_rms",
+        "vision_motion",
+        "anomaly_probability"
+      ],
+      "properties": {
+        "model_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "horizons": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "prefixItems": [
+            {
+              "const": 1
+            },
+            {
+              "const": 5
+            },
+            {
+              "const": 10
+            }
+          ]
+        },
+        "vibration_rms": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "vision_motion": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "minItems": 3,
+          "maxItems": 3
+        },
+        "anomaly_probability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "step_ms": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 10000
+        }
+      },
+      "additionalProperties": false
+    },
+    "sample_period_ms": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 10000
+    }
+  },
+  "additionalProperties": false
+}

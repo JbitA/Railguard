@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: RailGuard-MM
+message: If you use this software, please cite this repository and the Rail-VIVID dataset where applicable.
+type: software
+authors:
+  - family-names: Contributor
+    given-names: RailGuard-MM
+version: 0.1.0
+date-released: 2026-08-20
+license: MIT
+repository-code: https://github.com/your-user/railguard-mm
+preferred-citation:
+  type: article
+  title: A Multimodal Railway Vibration and Vision Dataset (Rail-VIVID)
+  authors:
+    - family-names: Ma
+      given-names: Sizhe
+    - family-names: Flanigan
+      given-names: Katherine A.
+    - family-names: Bergés
+      given-names: Mario
+    - family-names: Brooks
+      given-names: James D.
+  year: 2026
+  doi: 10.1038/s41597-026-07555-y

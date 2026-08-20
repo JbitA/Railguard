@@ -1,0 +1,20 @@
+flowchart LR
+  J1[9-36V IN] --> F1[F1 5A]
+  F1 --> RP[Reverse-polarity stage]
+  RP --> DC[MEAN WELL RSDW60F-12]
+  DC --> V12[12V / 5A]
+  V12 --> JETSON[Jetson Orin Nano DC jack]
+  JETSON -->|USB3 + 5V| CAM[See3CAM_50CUGM]
+  V12 --> B33[3.3V synchronous buck]
+  B33 --> STM[STM32H743]
+  B33 --> S1[IIS3DWB 1]
+  B33 --> S2[IIS3DWB 2]
+  B33 --> S3[IIS3DWB 3]
+  B33 --> GPS[ZED-F9P]
+  B33 --> ENV[SHT41 temp/RH]
+  S1 -->|SPI + INT| STM
+  S2 -->|SPI + INT| STM
+  S3 -->|SPI + INT| STM
+  GPS -->|UART + PPS| STM
+  ENV -->|I2C1| STM
+  STM -->|USB CDC| JETSON

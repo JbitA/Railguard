@@ -1,0 +1,38 @@
+net,endpoint_a,endpoint_b,design_note
+VIN_9V_36V,J1.1,F1.1,Vehicle input before fuse
+VIN_FUSED,F1.2,Q1.IN,5 A time-delay protected input
+VIN_PROTECTED,Q1.OUT,U7.VIN+,Reverse-polarity protected input
+GND_CHASSIS_RETURN,J1.2,U7.VIN-,Input return/chassis strategy resolved at enclosure entry
++12V_SYS,U7.VOUT+,JETSON_DC.POS,12 V rail into Jetson 9-20 V developer-kit input
++12V_SYS,U7.VOUT+,U8.VIN,Acquisition-board buck input
+0V_SYS,U7.VOUT-,JETSON_DC.NEG,Isolated system return
+0V_SYS,U7.VOUT-,U8.GND,Acquisition-board return
++3V3_SENS,U8.VOUT,U2.VDD*,STM32 digital supplies with local decoupling
++3V3_SENS,U8.VOUT,U3.VDD/VDDIO,IIS3DWB sensor 1 supply
++3V3_SENS,U8.VOUT,U4.VDD/VDDIO,IIS3DWB sensor 2 supply
++3V3_SENS,U8.VOUT,U5.VDD/VDDIO,IIS3DWB sensor 3 supply
++3V3_SENS,U8.VOUT,U6.VCC,ZED-F9P supply according to selected module/carrier
++3V3_SENS,U8.VOUT,U9.VDD,SHT41 supply with 100 nF local decoupling
+I2C1_SCL,U2.PB8,U9.SCL,4.7 kΩ pull-up to +3V3_SENS
+I2C1_SDA,U2.PB9,U9.SDA,4.7 kΩ pull-up to +3V3_SENS
+SPI1_SCK,U2.PA5,U3/U4/U5.SCK,Shared clock with optional 22-33 ohm source series footprint
+SPI1_MOSI,U2.PA7,U3/U4/U5.SDI,Shared MOSI
+SPI1_MISO,U2.PA6,U3/U4/U5.SDO,Shared MISO; only selected sensor drives bus
+ACC1_CS,U2.PB0,U3.CS,10 kΩ pull-up to 3.3 V
+ACC2_CS,U2.PB1,U4.CS,10 kΩ pull-up to 3.3 V
+ACC3_CS,U2.PB2,U5.CS,10 kΩ pull-up to 3.3 V
+ACC1_INT,U3.INT1,U2.PC0,FIFO watermark EXTI
+ACC2_INT,U4.INT1,U2.PC1,FIFO watermark EXTI
+ACC3_INT,U5.INT1,U2.PC2,FIFO watermark EXTI
+GNSS_TX,U6.TXD,U2.PB11,USART3 receive
+GNSS_RX,U2.PB10,U6.RXD,USART3 transmit
+GNSS_PPS,U6.TIMEPULSE,U2.PA0,TIM2_CH1 input capture; optional 22-68 ohm series footprint
+USB_DM,U2.PA11,J3.D-,90 ohm differential pair with USB ESD protection
+USB_DP,U2.PA12,J3.D+,90 ohm differential pair with USB ESD protection
+SWDIO,U2.PA13,J4.SWDIO,Cortex debug header
+SWCLK,U2.PA14,J4.SWCLK,Cortex debug header
+SWO,U2.PB3,J4.SWO,Optional trace
+NRST,U2.NRST,J4.NRST,10 kΩ pull-up plus 100 nF to GND
+CAM_USB3,JETSON_USB3,CAM1.USB3,Retained SuperSpeed cable
+GNSS_RF,U6.RF_IN,ANT1,50 ohm controlled RF path at carrier/module level
+NVME_PCIE,JETSON_M2,SSD1,Jetson M.2 Key-M connection

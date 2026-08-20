@@ -1,0 +1,12 @@
+numpy==2.2.3
+pandas==2.2.3
+scipy==1.15.2
+scikit-learn==1.6.1
+joblib==1.4.2
+torch==2.6.0
+torchvision==0.21.0
+Pillow==11.1.0
+huggingface-hub==0.29.1
+opencv-python-headless==4.11.0.86
+onnx>=1.17,<2
+onnxscript>=0.3,<1

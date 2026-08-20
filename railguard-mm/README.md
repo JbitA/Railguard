@@ -1,6 +1,6 @@
 # RailGuard-MM
 
-**RailGuard Multimodal Monitoring — a predictive edge-AI platform for railway condition monitoring.**
+**RailGuard Multimodal Monitoring — a predictive edge-AI platform for railway condition monitoring.** Made by Jarkko Ahtiluoma and uploaded to Github 21.8.2026.
 
 The name **RailGuard-MM** combines **RailGuard** (railway condition and infrastructure monitoring) with **MM** (**Multimodal**), reflecting the synchronized fusion of machine vision, multi-point vibration, GNSS, environmental context, and time-series modeling used throughout the system.
 

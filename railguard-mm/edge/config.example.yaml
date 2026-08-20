@@ -1,0 +1,34 @@
+device_id: railguard-001
+mqtt:
+  host: localhost
+  port: 1883
+  topic: railguard/telemetry/railguard-001
+  qos: 1
+  username: null
+  password: null
+  # Must match the ingestor ACK_HMAC_KEY; replace this development-only value.
+  ack_hmac_key: railguard_demo_ack_key_change_me
+serial:
+  port: /dev/ttyACM0
+  baudrate: 921600
+window:
+  seconds: 0.1
+  sample_rate_hz: 2000
+camera:
+  device: /dev/video0
+  width: 1280
+  height: 720
+  fps: 30
+spool:
+  path: data/edge_spool.sqlite
+  max_records: 200000
+
+model:
+  path: models/fusion_transformer.ts
+  seq_len: 32
+  version: fusion-transformer-v1
+
+cloud:
+  api_base: http://localhost:8000
+  event_anomaly_threshold: 0.85
+  event_cache: data/event_cache

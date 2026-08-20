@@ -1,0 +1,36 @@
+version: 1
+sources:
+  rail_vivid:
+    title: "Rail-VIVID: A Multimodal Railway Vibration and Vision Dataset"
+    role: "Primary benchmark for multimodal time-series forecasting, synchronization robustness, anomaly association, and spatial generalization."
+    provider: "Hugging Face / SALUS Lab, Carnegie Mellon University"
+    repository: "saluslab/Rail-VIVID"
+    doi: "10.57967/hf/8411"
+    paper_doi: "10.1038/s41597-026-07555-y"
+    license: "CC BY 4.0"
+    acquisition: "python ml/open_data.py acquire rail_vivid --pattern 'AtoB_*/*' --dest data/rail_vivid"
+    notes:
+      - "Six accelerometer channels, global-shutter images, GPS, temperature and humidity from repeated runs."
+      - "The dataset card documents nine ground-truth track anomalies and image-position drift that can reach roughly 15 m."
+      - "Use the immutable revision and file hashes written by the downloader manifest."
+  railway_surface_faults:
+    title: "Railway Track Surface Faults Dataset"
+    role: "Auxiliary machine-vision benchmark for rail-surface representation and seven-class fault recognition; never used as time-series ground truth for Rail-VIVID."
+    provider: "Mendeley Data / Mehran University of Engineering and Technology"
+    dataset_id: "8hxtgyyxrw"
+    version: 2
+    doi: "10.17632/8hxtgyyxrw.2"
+    landing_page: "https://data.mendeley.com/datasets/8hxtgyyxrw/2"
+    license: "CC BY 4.0"
+    classes:
+      - Cracks
+      - Flakings
+      - Grooves
+      - Joints
+      - Shellings
+      - Spallings
+      - Squats
+    acquisition: "Download Version 2 from the provider, then run: python ml/open_data.py import-surface-faults <downloaded-directory> --dest data/rail_surface_faults"
+    notes:
+      - "Images were extracted from dual-camera inspection-vehicle video and manually labeled by fault class."
+      - "Because adjacent extracted frames may be highly correlated, this benchmark is reported as an auxiliary vision task and not as evidence of spatial generalization."

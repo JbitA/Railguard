@@ -1,0 +1,168 @@
+{
+  "generated_utc": "2026-08-20T17:26:16Z",
+  "host": {
+    "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+    "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+    "python": "3.13.5"
+  },
+  "iterations": 200000,
+  "repeats": 5,
+  "median": {
+    "cpp20": {
+      "packet_decode_ns": 456.166,
+      "packet_decode_mpps": 2.19218,
+      "sensor_packet_decode_ns": 939.909,
+      "sensor_packet_decode_mpps": 1.06393,
+      "dsp_window_us": 6.34426,
+      "ring_roundtrip_ns": 0.86247
+    },
+    "python": {
+      "packet_decode_ns": 1179.31374,
+      "packet_decode_mpps": 0.8479507751686163,
+      "sensor_packet_decode_ns": 1956.89086,
+      "sensor_packet_decode_mpps": 0.5110147021689293,
+      "dsp_window_us": 120.27631246875312
+    }
+  },
+  "comparison": {
+    "packet_decode_speedup_cpp_vs_python": 2.5852732119447746,
+    "sensor_packet_decode_speedup_cpp_vs_python": 2.082000342586357,
+    "dsp_speedup_cpp_vs_python": 18.9582886686159
+  },
+  "raw": {
+    "cpp20": [
+      {
+        "language": "cpp20",
+        "iterations": 200000,
+        "packet_decode_ns": 469.279,
+        "packet_decode_mpps": 2.13093,
+        "sensor_packet_decode_ns": 1034.11,
+        "sensor_packet_decode_mpps": 0.967011,
+        "dsp_window_us": 6.48567,
+        "ring_roundtrip_ns": 0.860815,
+        "valid_packets": 200000,
+        "valid_sensor_packets": 200000,
+        "ring_ops": 200000,
+        "sink": 5645.21
+      },
+      {
+        "language": "cpp20",
+        "iterations": 200000,
+        "packet_decode_ns": 452.526,
+        "packet_decode_mpps": 2.20982,
+        "sensor_packet_decode_ns": 939.909,
+        "sensor_packet_decode_mpps": 1.06393,
+        "dsp_window_us": 6.34426,
+        "ring_roundtrip_ns": 0.86278,
+        "valid_packets": 200000,
+        "valid_sensor_packets": 200000,
+        "ring_ops": 200000,
+        "sink": 5645.21
+      },
+      {
+        "language": "cpp20",
+        "iterations": 200000,
+        "packet_decode_ns": 548.183,
+        "packet_decode_mpps": 1.82421,
+        "sensor_packet_decode_ns": 913.864,
+        "sensor_packet_decode_mpps": 1.09425,
+        "dsp_window_us": 6.25148,
+        "ring_roundtrip_ns": 1.62934,
+        "valid_packets": 200000,
+        "valid_sensor_packets": 200000,
+        "ring_ops": 200000,
+        "sink": 5645.21
+      },
+      {
+        "language": "cpp20",
+        "iterations": 200000,
+        "packet_decode_ns": 455.73,
+        "packet_decode_mpps": 2.19428,
+        "sensor_packet_decode_ns": 875.497,
+        "sensor_packet_decode_mpps": 1.14221,
+        "dsp_window_us": 5.90686,
+        "ring_roundtrip_ns": 0.861835,
+        "valid_packets": 200000,
+        "valid_sensor_packets": 200000,
+        "ring_ops": 200000,
+        "sink": 5645.21
+      },
+      {
+        "language": "cpp20",
+        "iterations": 200000,
+        "packet_decode_ns": 456.166,
+        "packet_decode_mpps": 2.19218,
+        "sensor_packet_decode_ns": 1107.13,
+        "sensor_packet_decode_mpps": 0.903237,
+        "dsp_window_us": 13.8456,
+        "ring_roundtrip_ns": 0.86247,
+        "valid_packets": 200000,
+        "valid_sensor_packets": 200000,
+        "ring_ops": 200000,
+        "sink": 5645.21
+      }
+    ],
+    "python": [
+      {
+        "language": "python",
+        "iterations": 200000,
+        "packet_decode_ns": 1188.720215,
+        "packet_decode_mpps": 0.8412408465687613,
+        "sensor_packet_decode_ns": 2027.597905,
+        "sensor_packet_decode_mpps": 0.49319443343970115,
+        "dsp_window_us": 120.27631246875312,
+        "valid_packets": 200000,
+        "valid_sensor_packets": 200000,
+        "sink": 5645.647217002151
+      },
+      {
+        "language": "python",
+        "iterations": 200000,
+        "packet_decode_ns": 1091.729975,
+        "packet_decode_mpps": 0.9159774146532892,
+        "sensor_packet_decode_ns": 1864.803545,
+        "sensor_packet_decode_mpps": 0.5362495168358338,
+        "dsp_window_us": 120.21050184981502,
+        "valid_packets": 200000,
+        "valid_sensor_packets": 200000,
+        "sink": 5645.647217002151
+      },
+      {
+        "language": "python",
+        "iterations": 200000,
+        "packet_decode_ns": 1161.713265,
+        "packet_decode_mpps": 0.8607976082635158,
+        "sensor_packet_decode_ns": 1860.859455,
+        "sensor_packet_decode_mpps": 0.5373860972214046,
+        "dsp_window_us": 115.18625427457253,
+        "valid_packets": 200000,
+        "valid_sensor_packets": 200000,
+        "sink": 5645.647217002151
+      },
+      {
+        "language": "python",
+        "iterations": 200000,
+        "packet_decode_ns": 1234.87825,
+        "packet_decode_mpps": 0.8097964313485966,
+        "sensor_packet_decode_ns": 1956.89086,
+        "sensor_packet_decode_mpps": 0.5110147021689293,
+        "dsp_window_us": 120.9046699330067,
+        "valid_packets": 200000,
+        "valid_sensor_packets": 200000,
+        "sink": 5645.647217002151
+      },
+      {
+        "language": "python",
+        "iterations": 200000,
+        "packet_decode_ns": 1179.31374,
+        "packet_decode_mpps": 0.8479507751686163,
+        "sensor_packet_decode_ns": 2017.49417,
+        "sensor_packet_decode_mpps": 0.4956643815233429,
+        "dsp_window_us": 124.35714908509148,
+        "valid_packets": 200000,
+        "valid_sensor_packets": 200000,
+        "sink": 5645.647217002151
+      }
+    ]
+  }
+}
